@@ -1,0 +1,24 @@
+male(rakesh).
+male(speaker).
+male(shyam ).
+
+% Define parent relationships.
+parent(rakesh, speaker).   
+parent(speaker, shyam ).  
+
+% Define father based on parent and male predicates.
+father(X, Y) :- parent(X, Y), male(X).
+
+% Define son based on parent and male predicates.
+son(Y, X) :- parent(X, Y), male(Y).
+
+% Define that the speaker has no siblings.
+no_siblings(speaker) :-
+    \+ (parent(rakesh, Sibling), parent(rakesh, speaker), Sibling \= speaker).
+
+solve_riddle(Man) :-
+no_siblings(speaker),      
+father(speaker, Man).     
+
+Query:
+solve_riddle(Man)
